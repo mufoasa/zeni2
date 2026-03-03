@@ -25,7 +25,7 @@ export function HomeContent({
       nameKey: "women",
       href: "/shop?category=women",
       image:
-        "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80",
+        "https://i.imgur.com/CfBSHdq.png",
     },
     {
       nameKey: "newArrivals",
