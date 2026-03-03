@@ -39,30 +39,30 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
     product.category === "new"
       ? t("newArrival")
       : product.category === "men"
-        ? t("men")
-        : t("women");
+      ? t("men")
+      : t("women");
 
   return (
-    <div>
+    <div className="px-4 sm:px-0">
       <Link
         href="/shop"
-        className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />
         {t("backToShop")}
       </Link>
 
-      <div className="grid gap-12 lg:grid-cols-2">
-        {/* Images */}
+      <div className="grid gap-8 sm:gap-12 lg:grid-cols-2">
+        
         <div className="flex flex-col gap-4">
-          {/* Main Image */}
-          <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
+          
+          <div className="relative aspect-square sm:aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
             {images.length > 0 ? (
               <Image
                 src={images[activeImage] || "/placeholder.svg"}
                 alt={product.name}
                 fill
-                className="object-cover transition-opacity duration-300"
+                className="object-cover"
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
@@ -71,14 +71,15 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
                 {t("noImage")}
               </div>
             )}
+
             {product.category === "new" && (
-              <span className="absolute left-4 top-4 rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-primary-foreground">
+              <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
                 {t("newArrival")}
               </span>
             )}
           </div>
 
-          {/* Thumbnail Strip */}
+          
           {images.length > 1 && (
             <div className="flex gap-3 overflow-x-auto pb-1">
               {images.map((img, i) => (
@@ -87,7 +88,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
                   type="button"
                   onClick={() => setActiveImage(i)}
                   className={cn(
-                    "relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all",
+                    "relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all",
                     activeImage === i
                       ? "border-primary ring-1 ring-primary"
                       : "border-border opacity-60 hover:opacity-100"
@@ -108,24 +109,28 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
 
         {/* Details */}
         <div className="flex flex-col justify-center">
-          <p className="text-sm font-medium uppercase tracking-wider text-primary">
+          <p className="text-xs sm:text-sm font-medium uppercase tracking-wider text-primary">
             {categoryLabel}
           </p>
-          <h1 className="mt-2 font-display text-4xl font-bold tracking-tight text-foreground">
+
+          <h1 className="mt-2 font-display text-2xl sm:text-4xl font-bold tracking-tight text-foreground">
             {product.name}
           </h1>
-          <p className="mt-4 text-3xl font-bold text-foreground">
+
+          <p className="mt-3 text-2xl sm:text-3xl font-bold text-foreground">
             {formatPrice(product.price)}
           </p>
-          <p className="mt-6 leading-relaxed text-muted-foreground">
+
+          <p className="mt-5 text-sm sm:text-base leading-relaxed text-muted-foreground">
             {product.description}
           </p>
 
-          {/* Sizes */}
-          <div className="mt-8">
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+          
+          <div className="mt-6">
+            <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-foreground">
               {t("size")}
             </h3>
+
             <div className="flex flex-wrap gap-3">
               {sizes.map((s) => (
                 <button
@@ -134,7 +139,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
                   disabled={s.stock === 0}
                   onClick={() => setSelectedSize(s.size)}
                   className={cn(
-                    "flex h-12 w-14 items-center justify-center rounded-lg border text-sm font-medium transition-all",
+                    "flex h-10 w-12 sm:h-12 sm:w-14 items-center justify-center rounded-lg border text-sm font-medium transition-all",
                     selectedSize === s.size
                       ? "border-primary bg-primary text-primary-foreground"
                       : "border-border bg-secondary text-secondary-foreground hover:border-primary/50",
@@ -147,37 +152,40 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
             </div>
           </div>
 
-          {/* Quantity */}
-          <div className="mt-8">
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+          
+          <div className="mt-6">
+            <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-foreground">
               {t("quantity")}
             </h3>
+
             <div className="flex items-center gap-4">
               <button
                 type="button"
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
+                className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
               >
                 <Minus className="h-4 w-4" />
               </button>
-              <span className="w-8 text-center text-lg font-semibold text-foreground">
+
+              <span className="w-8 text-center text-base sm:text-lg font-semibold text-foreground">
                 {quantity}
               </span>
+
               <button
                 type="button"
                 onClick={() => setQuantity(quantity + 1)}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
+                className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
               >
                 <Plus className="h-4 w-4" />
               </button>
             </div>
           </div>
 
-          {/* Add to cart */}
+          
           <button
             type="button"
             onClick={handleAddToCart}
-            className="mt-10 flex items-center justify-center gap-3 rounded-lg bg-primary px-8 py-4 text-base font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+            className="mt-8 w-full sm:w-auto flex items-center justify-center gap-3 rounded-lg bg-primary px-6 py-4 text-base font-semibold text-primary-foreground transition-opacity hover:opacity-90"
           >
             <ShoppingBag className="h-5 w-5" />
             {t("addToCart")}
