@@ -41,7 +41,7 @@ export function HomeContent({
       <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?w=1600&q=80"
+            src="https://i.imgur.com/iYORW0A.png"
             alt="Denim fabric texture"
             fill
             className="object-cover"
