@@ -29,13 +29,16 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex font-display text-2xl font-bold tracking-tight">
-  <span className="rounded-l-md bg-red-600 px-1.5 py-1 text-white">
-    US
+        <Link href="/" className="flex items-center overflow-hidden rounded-sm font-black italic">
+  
+  <span className="bg-[#ED1C24] px-1 text-white flex">
+    <span className="tracking-tighter">US</span>
   </span>
-
-  <span className="rounded-r-md bg-blue-600 px-1.5 py-1 text-white">
-    TOP
+  
+  
+  <span className="bg-[#1B188C] px-1 text-white flex">
+    <span className="tracking-tighter">TOP</span>
+    <sup className="text-[10px] mt-1 ml-0.5 not-italic">®</sup>
   </span>
 </Link>
 
