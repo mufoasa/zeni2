@@ -24,6 +24,7 @@ export default async function AdminProductsPage() {
             Manage your product catalog
           </p>
         </div>
+
         <Link
           href="/admin/products/new"
           className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
@@ -54,6 +55,7 @@ export default async function AdminProductsPage() {
               </th>
             </tr>
           </thead>
+
           <tbody>
             {(products as Product[])?.map((product) => (
               <tr
@@ -63,7 +65,7 @@ export default async function AdminProductsPage() {
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <div className="relative h-10 w-10 overflow-hidden rounded-md bg-secondary">
-                      {product.images[0] && (
+                      {product.images?.[0] && (
                         <Image
                           src={product.images[0] || "/placeholder.svg"}
                           alt={product.name}
@@ -73,17 +75,24 @@ export default async function AdminProductsPage() {
                         />
                       )}
                     </div>
+
                     <span className="text-sm font-medium text-foreground">
                       {product.name}
                     </span>
                   </div>
                 </td>
+
                 <td className="px-4 py-3 text-sm capitalize text-muted-foreground">
                   {product.category}
                 </td>
+
                 <td className="px-4 py-3 text-sm text-foreground">
-                  {"$"}{product.price.toFixed(2)}
+                  {Number(product.price || 0).toLocaleString("mk-MK", {
+                    maximumFractionDigits: 0,
+                  })}{" "}
+                  ден
                 </td>
+
                 <td className="px-4 py-3">
                   <span
                     className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${
@@ -95,6 +104,7 @@ export default async function AdminProductsPage() {
                     {product.featured ? "Yes" : "No"}
                   </span>
                 </td>
+
                 <td className="px-4 py-3 text-right">
                   <div className="flex items-center justify-end gap-2">
                     <Link
@@ -103,6 +113,7 @@ export default async function AdminProductsPage() {
                     >
                       Edit
                     </Link>
+
                     <DeleteProductButton productId={product.id} />
                   </div>
                 </td>
