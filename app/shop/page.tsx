@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
 import { ShopFilters } from "@/components/shop-filters";
 import { ShopTitle } from "@/components/shop-title";
-import type { Product } from "@/lib/types";
+import type { ProductWithSizes } from "@/lib/types";
 
 export default async function ShopPage({
   searchParams,
@@ -14,7 +14,7 @@ export default async function ShopPage({
   const params = await searchParams;
   const supabase = await createClient();
 
-  let query = supabase.from("products").select("*");
+  let query = supabase.from("products").select("*, product_sizes(*)");
 
   if (params.category) {
     query = query.eq("category", params.category);
@@ -47,14 +47,23 @@ export default async function ShopPage({
 
           {products && products.length > 0 ? (
             <div className="mt-8 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-              {(products as Product[]).map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+              {(products as ProductWithSizes[]).map((product) => {
+                const totalStock = product.product_sizes?.reduce(
+                  (sum, s) => sum + s.stock,
+                  0
+                ) ?? 0;
+                return (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    totalStock={totalStock}
+                  />
+                );
+              })}
             </div>
           ) : (
             <div className="mt-16 text-center">
               <p className="text-lg text-muted-foreground">
-                {/* Fallback in case translations haven't loaded */}
                 No products found in this category.
               </p>
             </div>
