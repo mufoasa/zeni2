@@ -37,7 +37,7 @@ export function SiteHeader() {
       background: "linear-gradient(to right, #ED1C24 50%, #1B188C 50%)",
     }}
   >
-    <span className="tracking-tighter text-white">
+    <span className="tracking-tighter text-white text-lg">
       USTOP<sup className="ml-0.5 text-[10px] not-italic">®</sup>
     </span>
   </div>
