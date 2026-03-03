@@ -5,12 +5,12 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { ProductCard } from "@/components/product-card";
-import type { Product } from "@/lib/types";
+import type { ProductWithSizes } from "@/lib/types";
 
 export function HomeContent({
   featuredProducts,
 }: {
-  featuredProducts: Product[];
+  featuredProducts: ProductWithSizes[];
 }) {
   const { t } = useLocale();
 
@@ -133,9 +133,19 @@ export function HomeContent({
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {featuredProducts.map((product) => {
+              const totalStock = product.product_sizes?.reduce(
+                (sum, s) => sum + s.stock,
+                0
+              ) ?? 0;
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  totalStock={totalStock}
+                />
+              );
+            })}
           </div>
         </section>
       )}
