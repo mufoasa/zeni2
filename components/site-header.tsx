@@ -30,16 +30,18 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center overflow-hidden rounded-sm font-black italic">
-  
-  <span className="bg-[#ED1C24] px-1 text-white flex">
-    <span className="tracking-tighter">US</span>
-  </span>
-  
-  
-  <span className="bg-[#1B188C] px-1 text-white flex">
-    <span className="tracking-tighter">TOP</span>
-    <sup className="text-[10px] mt-1 ml-0.5 not-italic">®</sup>
-  </span>
+
+  <div
+    className="relative flex h-8 w-24 items-center justify-center rounded-sm"
+    style={{
+      background: "linear-gradient(to right, #ED1C24 50%, #1B188C 50%)",
+    }}
+  >
+    <span className="tracking-tighter text-white">
+      USTOP<sup className="ml-0.5 text-[10px] not-italic">®</sup>
+    </span>
+  </div>
+
 </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
