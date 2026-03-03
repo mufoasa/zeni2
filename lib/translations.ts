@@ -5,8 +5,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Header / Nav
     home: "Ballina",
     shopAll: "Dyqani",
-    men: "Burra",
-    women: "Gra",
+    men: "Meshkuj",
+    women: "Femra",
     newArrivals: "Të Rejat",
 
     // Hero
@@ -92,7 +92,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     aboutUs: "Rreth Nesh",
     contact: "Kontakti",
     shippingInfo2: "Info për Dërgesën",
-    footerDesc: "Xhinse premium të punuara me kujdes në Tetovë. Xhinse cilësore për burra dhe gra.",
+    footerDesc: "Xhinse premium të punuara me kujdes në Tetovë. Xhinse cilësore për meshkuj dhe femra.",
     allRightsReserved: "Të gjitha të drejtat e rezervuara.",
     returns: "Kthimet & Këmbimet",
     faq: "Pyetje të Shpeshta",
