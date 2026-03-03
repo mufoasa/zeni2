@@ -220,6 +220,8 @@ export const translations: Record<Locale, Record<string, string>> = {
 };
 
 export function formatPrice(price: number | string): string {
-  const num = typeof price === "string" ? Number.parseFloat(price) : price;
-  return `${Math.round(num * 61.5)} ден`;
+  const num =
+    typeof price === "string" ? Number.parseFloat(price) : price;
+
+  return `${Math.round(num)} ден`;
 }
