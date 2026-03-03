@@ -18,18 +18,22 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
 
-  const sizes = product.product_sizes.sort(
+  const sizes = [...product.product_sizes].sort(
     (a, b) => Number(a.size) - Number(b.size)
   );
 
   const images = product.images?.length ? product.images : [];
+  const totalStock = sizes.reduce((sum, s) => sum + s.stock, 0);
+  const isSoldOut = totalStock <= 0;
 
   function handleAddToCart() {
     if (!selectedSize) {
       toast.error(t("pleaseSelectSize"));
       return;
     }
+
     addItem(product, selectedSize, quantity);
+
     toast.success(
       `${product.name} (${t("size")} ${selectedSize}) ${t("addedToCart")}`
     );
@@ -53,16 +57,18 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
       </Link>
 
       <div className="grid gap-8 sm:gap-12 lg:grid-cols-2">
-        
+        {/* Images */}
         <div className="flex flex-col gap-4">
-          
           <div className="relative aspect-square sm:aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
             {images.length > 0 ? (
               <Image
                 src={images[activeImage] || "/placeholder.svg"}
                 alt={product.name}
                 fill
-                className="object-cover"
+                className={cn(
+                  "object-cover transition-all duration-300",
+                  isSoldOut && "grayscale opacity-80"
+                )}
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
@@ -72,14 +78,21 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
               </div>
             )}
 
-            {product.category === "new" && (
+            {product.category === "new" && !isSoldOut && (
               <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
                 {t("newArrival")}
               </span>
             )}
+
+            {isSoldOut && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                <span className="rounded-lg bg-white px-6 py-2 text-sm sm:text-base font-bold uppercase tracking-wider text-black">
+                  {t("soldOut")}
+                </span>
+              </div>
+            )}
           </div>
 
-          
           {images.length > 1 && (
             <div className="flex gap-3 overflow-x-auto pb-1">
               {images.map((img, i) => (
@@ -125,7 +138,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
             {product.description}
           </p>
 
-          
+          {/* Sizes */}
           <div className="mt-6">
             <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-foreground">
               {t("size")}
@@ -152,44 +165,54 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
             </div>
           </div>
 
-          
-          <div className="mt-6">
-            <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-foreground">
-              {t("quantity")}
-            </h3>
+          {/* Quantity */}
+          {!isSoldOut && (
+            <div className="mt-6">
+              <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-foreground">
+                {t("quantity")}
+              </h3>
 
-            <div className="flex items-center gap-4">
-              <button
-                type="button"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
-              >
-                <Minus className="h-4 w-4" />
-              </button>
+              <div className="flex items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                  className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
+                >
+                  <Minus className="h-4 w-4" />
+                </button>
 
-              <span className="w-8 text-center text-base sm:text-lg font-semibold text-foreground">
-                {quantity}
-              </span>
+                <span className="w-8 text-center text-base sm:text-lg font-semibold text-foreground">
+                  {quantity}
+                </span>
 
-              <button
-                type="button"
-                onClick={() => setQuantity(quantity + 1)}
-                className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setQuantity(quantity + 1)}
+                  className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
-          
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            className="mt-8 w-full sm:w-auto flex items-center justify-center gap-3 rounded-lg bg-primary px-6 py-4 text-base font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            <ShoppingBag className="h-5 w-5" />
-            {t("addToCart")}
-          </button>
+          {/* Add to Cart */}
+          <div className="mt-8">
+            {isSoldOut ? (
+              <div className="w-full rounded-lg bg-destructive/10 border border-destructive/20 px-6 py-4 text-center text-sm sm:text-base font-semibold text-destructive">
+                {t("soldOut")}
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="w-full sm:w-auto flex items-center justify-center gap-3 rounded-lg bg-primary px-6 py-4 text-base font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                <ShoppingBag className="h-5 w-5" />
+                {t("addToCart")}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
