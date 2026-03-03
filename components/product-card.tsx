@@ -4,10 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "@/components/locale-provider";
 import { formatPrice } from "@/lib/translations";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/types";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({
+  product,
+  totalStock,
+}: {
+  product: Product;
+  totalStock?: number;
+}) {
   const { t } = useLocale();
+  const isSoldOut = totalStock !== undefined && totalStock <= 0;
 
   return (
     <Link
@@ -20,7 +28,10 @@ export function ProductCard({ product }: { product: Product }) {
             src={product.images[0] || "/placeholder.svg"}
             alt={product.name}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className={cn(
+              "object-cover transition-transform duration-500 group-hover:scale-105",
+              isSoldOut && "opacity-40 grayscale"
+            )}
             sizes="(max-width: 768px) 50vw, 25vw"
           />
         ) : (
@@ -28,7 +39,14 @@ export function ProductCard({ product }: { product: Product }) {
             {t("noImage")}
           </div>
         )}
-        {product.category === "new" && (
+        {isSoldOut && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="rounded-lg bg-background/90 px-5 py-2 text-sm font-bold uppercase tracking-wider text-destructive">
+              {t("soldOut")}
+            </span>
+          </div>
+        )}
+        {!isSoldOut && product.category === "new" && (
           <span className="absolute left-3 top-3 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
             {t("newArrival")}
           </span>
@@ -38,7 +56,10 @@ export function ProductCard({ product }: { product: Product }) {
         <h3 className="text-sm font-medium text-foreground transition-colors group-hover:text-primary">
           {product.name}
         </h3>
-        <p className="text-sm font-semibold text-muted-foreground">
+        <p className={cn(
+          "text-sm font-semibold",
+          isSoldOut ? "text-destructive line-through" : "text-muted-foreground"
+        )}>
           {formatPrice(product.price)}
         </p>
       </div>
