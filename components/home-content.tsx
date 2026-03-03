@@ -25,7 +25,7 @@ export function HomeContent({
       nameKey: "women",
       href: "/shop?category=women",
       image:
-        "https://i.imgur.com/CfBSHdq.png",
+        "https://i.imgur.com/H0WqucU.png",
     },
     {
       nameKey: "newArrivals",
