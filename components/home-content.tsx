@@ -19,7 +19,7 @@ export function HomeContent({
       nameKey: "men",
       href: "/shop?category=men",
       image:
-        "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=800&q=80",
+        "https://i.imgur.com/zVGT4Iz.png",
     },
     {
       nameKey: "women",
