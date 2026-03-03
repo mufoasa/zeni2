@@ -45,6 +45,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     pleaseSelectSize: "Ju lutem zgjidhni një madhësi",
     addedToCart: "u shtua në shportë",
     noImage: "Pa foto",
+    soldOut: "E Shitur",
 
     // Cart
     yourCartEmpty: "Shporta juaj është bosh",
@@ -153,6 +154,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     pleaseSelectSize: "Ве молиме изберете големина",
     addedToCart: "е додадено во кошничка",
     noImage: "Нема слика",
+    soldOut: "Распродадено",
 
     // Cart
     yourCartEmpty: "Вашата кошничка е празна",
