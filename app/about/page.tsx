@@ -1,18 +1,36 @@
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
+
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16">
-      <h1 className="mb-6 text-3xl font-bold">About Us</h1>
+    <>
+      <SiteHeader />
 
-      <div className="space-y-4 text-muted-foreground">
-        <p>
-          Welcome to USTOP Jeans. We are a modern clothing brand focused on
-          quality denim and contemporary street fashion.
-        </p>
+      <main className="mx-auto max-w-5xl px-6 py-20">
+        <div className="space-y-10">
+          <div className="space-y-4">
+            <h1 className="text-4xl font-bold tracking-tight">About USTOP Jeans</h1>
+            <p className="text-muted-foreground leading-relaxed max-w-3xl">
+              USTOP Jeans is a modern clothing brand focused on high quality denim
+              products built for comfort, durability, and urban style.
+            </p>
+          </div>
 
-        <p>
-          Our mission is to deliver premium style with comfort and durability.
-        </p>
-      </div>
-    </main>
+          <div className="grid md:grid-cols-2 gap-10 text-muted-foreground">
+            <p>
+              Our mission is to deliver premium fashion products with clean design
+              and long lasting material quality.
+            </p>
+
+            <p>
+              We believe clothing should combine style, comfort, and confidence.
+              Every product is carefully selected and tested.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <SiteFooter />
+    </>
   );
 }
