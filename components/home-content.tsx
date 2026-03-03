@@ -31,7 +31,7 @@ export function HomeContent({
       nameKey: "newArrivals",
       href: "/shop?category=new",
       image:
-        "hhttps://i.imgur.com/MYeqobH.png",
+        "https://i.imgur.com/MYeqobH.png",
     },
   ];
 
