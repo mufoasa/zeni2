@@ -25,7 +25,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Brand
     craftedInTetovo: "E Punuar në Tetovë",
-    brandStatement: "Çdo palë xhinse USTOP është bërë me kujdes të veçantë. Nga përzgjedhja e denimit deri te qepja e fundit, ne sigurojmë cilësinë që e ndihet me çdo përdorim.",
+    brandStatement: "E krijuar me përkushtim, ku cilësia dhe detajet bashkohen në çdo produkt.",
 
     // Shop page
     allProducts: "Të Gjitha Produktet",
@@ -134,7 +134,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Brand
     craftedInTetovo: "Изработено во Тетово",
-    brandStatement: "Секој пар USTOP фармерки е изработен со посебно внимание. Од изборот на деним до последниот бод, обезбедуваме квалитет што го чувствувате со секое носење.",
+    brandStatement: "Создадено со посветеност, каде што квалитетот и деталите се спојуваат во секој производ.",
 
     // Shop page
     allProducts: "Сите Производи",
