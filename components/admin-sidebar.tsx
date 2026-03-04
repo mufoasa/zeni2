@@ -8,7 +8,10 @@ import {
   ShoppingCart,
   LogOut,
   ExternalLink,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
+import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +24,7 @@ const navItems = [
 export function AdminSidebar({ userEmail }: { userEmail: string }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [collapsed, setCollapsed] = useState(false);
 
   async function handleLogout() {
     const supabase = createClient();
@@ -30,34 +34,55 @@ export function AdminSidebar({ userEmail }: { userEmail: string }) {
   }
 
   return (
-    <aside className="flex w-64 flex-col border-r border-border bg-card">
-      <div className="flex items-center gap-2 border-b border-border px-6 py-5">
-        <Link
-          href="/admin"
-          className="font-display text-xl font-bold tracking-tight text-foreground"
+    <aside
+      className={cn(
+        "flex flex-col border-r border-border bg-card transition-all duration-300",
+        collapsed ? "w-20" : "w-64"
+      )}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-border px-4 py-5">
+        {!collapsed && (
+          <Link
+            href="/admin"
+            className="font-display text-xl font-bold tracking-tight text-foreground"
+          >
+            USTOP Admin
+          </Link>
+        )}
+
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="rounded-md p-2 hover:bg-secondary"
         >
-          USTOP Admin
-        </Link>
+          {collapsed ? (
+            <PanelLeftOpen className="h-4 w-4" />
+          ) : (
+            <PanelLeftClose className="h-4 w-4" />
+          )}
+        </button>
       </div>
 
-      <nav className="flex flex-1 flex-col gap-1 px-3 py-4">
+      {/* Navigation */}
+      <nav className="flex flex-1 flex-col gap-1 px-2 py-4">
         {navItems.map((item) => {
           const isActive =
             pathname === item.href ||
             (item.href !== "/admin" && pathname.startsWith(item.href));
+
           return (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
                   ? "bg-primary/10 text-primary"
                   : "text-muted-foreground hover:bg-secondary hover:text-foreground"
               )}
             >
-              <item.icon className="h-4 w-4" />
-              {item.label}
+              <item.icon className="h-4 w-4 shrink-0" />
+              {!collapsed && <span>{item.label}</span>}
             </Link>
           );
         })}
@@ -67,22 +92,26 @@ export function AdminSidebar({ userEmail }: { userEmail: string }) {
           target="_blank"
           className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
         >
-          <ExternalLink className="h-4 w-4" />
-          View Store
+          <ExternalLink className="h-4 w-4 shrink-0" />
+          {!collapsed && <span>View Store</span>}
         </Link>
       </nav>
 
-      <div className="border-t border-border px-3 py-4">
-        <p className="mb-2 truncate px-3 text-xs text-muted-foreground">
-          {userEmail}
-        </p>
+      {/* Footer */}
+      <div className="border-t border-border px-2 py-4">
+        {!collapsed && (
+          <p className="mb-2 truncate px-3 text-xs text-muted-foreground">
+            {userEmail}
+          </p>
+        )}
+
         <button
           type="button"
           onClick={handleLogout}
           className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
         >
-          <LogOut className="h-4 w-4" />
-          Sign Out
+          <LogOut className="h-4 w-4 shrink-0" />
+          {!collapsed && <span>Sign Out</span>}
         </button>
       </div>
     </aside>
