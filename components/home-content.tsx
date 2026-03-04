@@ -167,9 +167,10 @@ export function HomeContent({
         </section>
       )}
 
-      {/* Brand Statement */}
+          {/* Brand Statement + Map */}
       <section className="border-t border-border bg-secondary/30">
-        <div className="mx-auto max-w-4xl px-6 py-24 text-center">
+        <div className="mx-auto max-w-6xl px-6 py-24 text-center">
+
           <h2 className="font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
             {t("craftedInTetovo")}
           </h2>
@@ -177,8 +178,22 @@ export function HomeContent({
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             {t("brandStatement")}
           </p>
+
+          {/* Map */}
+          <div className="mt-12 overflow-hidden rounded-2xl border border-border shadow-lg">
+            <iframe
+              className="w-full h-[350px] md:h-[450px]"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2964.634495656438!2d20.97146837636053!3d42.008119157263245!2m3!1f0!2m3!1f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1353f1a9f3b36e77%3A0x8abef1e6902d15db!2sUstop%20Jeans!5e0!3m2!1ssq!2smk!4v1772594086657"
+            />
+          </div>
+
         </div>
       </section>
+
     </main>
   );
 }
