@@ -10,7 +10,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     newArrivals: "Të Rejat",
 
     // Hero
-    heroSubtitle: "Xhinse premium të punuara me dorë në Tetovë. Stili i përbërshëm takon cilësinë e pakompromis.",
+    heroSubtitle: "Eksploro veshjet që definojnë stilin tënd. Cilësi e lartë, dizajn modern dhe gjithçka që të duhet për të krijuar identitetin tuaj në stil.",
     shopCollection: "Shfleto Koleksionin",
 
     // Categories
@@ -119,7 +119,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     newArrivals: "Нови",
 
     // Hero
-    heroSubtitle: "Премиум деним рачно изработен во Тетово. Безвременски стил среќава бескомпромисен квалитет.",
+    heroSubtitle: "Истражи ја облеката што го дефинира твојот стил. Висок квалитет, модерен дизајн и сè што ти е потребно за да го креираш твојот сопствен стилски идентитет.",
     shopCollection: "Прегледај Колекција",
 
     // Categories
