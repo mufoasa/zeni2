@@ -34,9 +34,10 @@ export function HomeContent({
 
   return (
     <main className="flex-1">
-      {/* HERO SECTION */}
+
+      {/* ================= HERO ================= */}
       <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden">
-        {/* Video Background */}
+
         <div className="absolute inset-0">
           <video
             autoPlay
@@ -48,25 +49,23 @@ export function HomeContent({
             <source src="/hero-video.mp4" type="video/mp4" />
           </video>
 
-          {/* Dark Premium Overlay */}
           <div className="absolute inset-0 bg-black/55" />
         </div>
 
-        {/* Hero Content */}
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <h1 className="font-display text-5xl font-bold leading-tight tracking-tight text-white md:text-7xl lg:text-8xl">
             USTOP
             <span className="block text-primary">JEANS</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-gray-200 md:text-xl">
+          <p className="mx-auto mt-6 max-w-xl text-lg text-gray-200 md:text-xl">
             {t("heroSubtitle")}
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
               href="/shop"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
             >
               {t("shopCollection")}
               <ArrowRight className="h-4 w-4" />
@@ -74,7 +73,7 @@ export function HomeContent({
 
             <Link
               href="/shop?category=new"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/30 px-8 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-lg border border-white/30 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10"
             >
               {t("newArrivals")}
             </Link>
@@ -82,12 +81,13 @@ export function HomeContent({
         </div>
       </section>
 
-      {/* Categories */}
+      {/* ================= CATEGORIES ================= */}
       <section className="mx-auto max-w-7xl px-6 py-24">
         <div className="mb-12 text-center">
-          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="font-display text-3xl font-bold md:text-4xl">
             {t("shopByCategory")}
           </h2>
+
           <p className="mt-3 text-muted-foreground">
             {t("findPerfectFit")}
           </p>
@@ -101,17 +101,16 @@ export function HomeContent({
               className="group relative flex aspect-[4/5] items-end overflow-hidden rounded-xl"
             >
               <Image
-                src={cat.image || "/placeholder.svg"}
+                src={cat.image}
                 alt={t(cat.nameKey)}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 33vw"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
 
               <div className="relative z-10 p-8">
-                <h3 className="font-display text-2xl font-bold text-foreground">
+                <h3 className="font-display text-2xl font-bold">
                   {t(cat.nameKey)}
                 </h3>
 
@@ -125,14 +124,15 @@ export function HomeContent({
         </div>
       </section>
 
-      {/* Featured Products */}
+      {/* ================= FEATURED PRODUCTS ================= */}
       {featuredProducts.length > 0 && (
         <section className="mx-auto max-w-7xl px-6 pb-24">
-          <div className="mb-12 flex items-end justify-between">
+          <div className="mb-12 flex justify-between">
             <div>
-              <h2 className="font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+              <h2 className="font-display text-3xl font-bold md:text-4xl">
                 {t("featured")}
               </h2>
+
               <p className="mt-3 text-muted-foreground">
                 {t("popularStyles")}
               </p>
@@ -140,7 +140,7 @@ export function HomeContent({
 
             <Link
               href="/shop"
-              className="hidden items-center gap-1 text-sm font-medium text-primary transition-opacity hover:opacity-80 sm:inline-flex"
+              className="hidden items-center gap-1 text-sm font-medium text-primary sm:inline-flex"
             >
               {t("viewAll")}
               <ArrowRight className="h-4 w-4" />
@@ -167,27 +167,24 @@ export function HomeContent({
         </section>
       )}
 
-          {/* Brand Statement + Map */}
+      {/* ================= BRAND + MAP ================= */}
       <section className="border-t border-border bg-secondary/30">
         <div className="mx-auto max-w-6xl px-6 py-24 text-center">
 
-          <h2 className="font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">
+          <h2 className="font-display text-3xl font-bold md:text-4xl">
             {t("craftedInTetovo")}
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
             {t("brandStatement")}
           </p>
 
-          {/* Map */}
-          <div className="mt-12 overflow-hidden rounded-2xl border border-border shadow-lg">
+          <div className="mt-12 w-full aspect-video overflow-hidden rounded-2xl border shadow-lg">
             <iframe
-              className="w-full h-[350px] md:h-[450px]"
-              style={{ border: 0 }}
+              className="w-full h-full"
               loading="lazy"
               allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2964.634495656438!2d20.97146837636053!3d42.008119157263245!2m3!1f0!2m3!1f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1353f1a9f3b36e77%3A0x8abef1e6902d15db!2sUstop%20Jeans!5e0!3m2!1ssq!2smk!4v1772594086657"
+              src="https://maps.google.com/maps?q=Ustop%20Jeans%20Tetovo&output=embed"
             />
           </div>
 
