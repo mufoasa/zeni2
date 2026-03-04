@@ -25,7 +25,7 @@ export function SiteFooter() {
 
             <div className="mt-6 flex gap-3">
               <a
-                href="https://facebook.com"
+                href="https://facebook.com/Ustop1"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -34,7 +34,7 @@ export function SiteFooter() {
               </a>
 
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/ustopjeans.mk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -160,20 +160,20 @@ export function SiteFooter() {
               <li className="flex items-center gap-2.5">
                 <Mail className="h-4 w-4 shrink-0 text-primary" />
                 <a
-                  href="mailto:info@ustopjeans.com"
+                  href="mailto:info.ustopjeans@gmail.com"
                   className="text-sm text-muted-foreground hover:text-foreground"
                 >
-                  info@ustopjeans.com
+                  info.ustopjeans@gmail.com
                 </a>
               </li>
 
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-primary" />
                 <a
-                  href="tel:+38970000000"
+                  href="tel:+38971377798"
                   className="text-sm text-muted-foreground hover:text-foreground"
                 >
-                  +389 70 000 000
+                  +389 71 377 798
                 </a>
               </li>
 
