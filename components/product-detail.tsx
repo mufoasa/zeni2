@@ -48,7 +48,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
       : t("women");
 
   return (
-    <div className="mx-auto max-w-6xl px-4">
+    <div className="mx-auto max-w-6xl px-4 overflow-x-hidden">
       <Link
         href="/shop"
         className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -57,10 +57,10 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
         {t("backToShop")}
       </Link>
 
-      <div className="grid gap-10 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         {/* Images */}
-        <div className="flex flex-col gap-4">
-          <div className="relative aspect-square sm:aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
+        <div className="flex w-full flex-col gap-4">
+          <div className="relative w-full aspect-square sm:aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
             {images.length > 0 ? (
               <Image
                 src={images[activeImage] || "/placeholder.svg"}
@@ -95,7 +95,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
           </div>
 
           {images.length > 1 && (
-            <div className="flex gap-3 overflow-x-auto pb-1">
+            <div className="flex max-w-full gap-3 overflow-x-auto pb-1">
               {images.map((img, i) => (
                 <button
                   key={i}
