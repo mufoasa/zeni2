@@ -14,6 +14,7 @@ import type { ProductWithSizes } from "@/lib/types";
 export function ProductDetail({ product }: { product: ProductWithSizes }) {
   const { addItem } = useCart();
   const { t } = useLocale();
+
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
@@ -47,7 +48,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
       : t("women");
 
   return (
-    <div className="px-4 sm:px-0">
+    <div className="mx-auto max-w-6xl px-4">
       <Link
         href="/shop"
         className="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -56,7 +57,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
         {t("backToShop")}
       </Link>
 
-      <div className="grid gap-8 sm:gap-12 lg:grid-cols-2">
+      <div className="grid gap-10 lg:grid-cols-2">
         {/* Images */}
         <div className="flex flex-col gap-4">
           <div className="relative aspect-square sm:aspect-[3/4] overflow-hidden rounded-xl bg-secondary">
@@ -65,12 +66,12 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
                 src={images[activeImage] || "/placeholder.svg"}
                 alt={product.name}
                 fill
-                className={cn(
-                  "object-cover transition-all duration-300",
-                  isSoldOut && "grayscale opacity-80"
-                )}
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                className={cn(
+                  "object-cover transition-all duration-300 hover:scale-105",
+                  isSoldOut && "grayscale opacity-80"
+                )}
               />
             ) : (
               <div className="flex h-full items-center justify-center text-muted-foreground">
@@ -86,7 +87,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
 
             {isSoldOut && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                <span className="rounded-lg bg-white px-6 py-2 text-sm sm:text-base font-bold uppercase tracking-wider text-black">
+                <span className="rounded-lg bg-white px-6 py-2 text-sm font-bold uppercase tracking-wider text-black">
                   {t("soldOut")}
                 </span>
               </div>
@@ -101,7 +102,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
                   type="button"
                   onClick={() => setActiveImage(i)}
                   className={cn(
-                    "relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all",
+                    "relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all",
                     activeImage === i
                       ? "border-primary ring-1 ring-primary"
                       : "border-border opacity-60 hover:opacity-100"
@@ -111,8 +112,8 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
                     src={img || "/placeholder.svg"}
                     alt={`${product.name} ${i + 1}`}
                     fill
-                    className="object-cover"
                     sizes="80px"
+                    className="object-cover"
                   />
                 </button>
               ))}
@@ -121,26 +122,26 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
         </div>
 
         {/* Details */}
-        <div className="flex flex-col justify-center">
-          <p className="text-xs sm:text-sm font-medium uppercase tracking-wider text-primary">
+        <div className="flex flex-col">
+          <p className="text-sm font-medium uppercase tracking-wider text-primary">
             {categoryLabel}
           </p>
 
-          <h1 className="mt-2 font-display text-2xl sm:text-4xl font-bold tracking-tight text-foreground">
+          <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-foreground">
             {product.name}
           </h1>
 
-          <p className="mt-3 text-2xl sm:text-3xl font-bold text-foreground">
+          <p className="mt-3 text-3xl font-bold text-foreground">
             {formatPrice(product.price)}
           </p>
 
-          <p className="mt-5 text-sm sm:text-base leading-relaxed text-muted-foreground">
+          <p className="mt-5 text-base leading-relaxed text-muted-foreground">
             {product.description}
           </p>
 
           {/* Sizes */}
           <div className="mt-6">
-            <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-foreground">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
               {t("size")}
             </h3>
 
@@ -152,7 +153,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
                   disabled={s.stock === 0}
                   onClick={() => setSelectedSize(s.size)}
                   className={cn(
-                    "flex h-10 w-12 sm:h-12 sm:w-14 items-center justify-center rounded-lg border text-sm font-medium transition-all",
+                    "flex h-12 w-14 items-center justify-center rounded-lg border text-sm font-medium transition-all",
                     selectedSize === s.size
                       ? "border-primary bg-primary text-primary-foreground"
                       : "border-border bg-secondary text-secondary-foreground hover:border-primary/50",
@@ -168,7 +169,7 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
           {/* Quantity */}
           {!isSoldOut && (
             <div className="mt-6">
-              <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-foreground">
+              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
                 {t("quantity")}
               </h3>
 
@@ -176,19 +177,19 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
                 <button
                   type="button"
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-secondary transition-colors hover:bg-muted"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
 
-                <span className="w-8 text-center text-base sm:text-lg font-semibold text-foreground">
+                <span className="w-8 text-center text-lg font-semibold">
                   {quantity}
                 </span>
 
                 <button
                   type="button"
                   onClick={() => setQuantity(quantity + 1)}
-                  className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-secondary text-secondary-foreground transition-colors hover:bg-muted"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-secondary transition-colors hover:bg-muted"
                 >
                   <Plus className="h-4 w-4" />
                 </button>
@@ -199,14 +200,14 @@ export function ProductDetail({ product }: { product: ProductWithSizes }) {
           {/* Add to Cart */}
           <div className="mt-8">
             {isSoldOut ? (
-              <div className="w-full rounded-lg bg-destructive/10 border border-destructive/20 px-6 py-4 text-center text-sm sm:text-base font-semibold text-destructive">
+              <div className="w-full rounded-lg border border-destructive/20 bg-destructive/10 px-6 py-4 text-center font-semibold text-destructive">
                 {t("soldOut")}
               </div>
             ) : (
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="w-full sm:w-auto flex items-center justify-center gap-3 rounded-lg bg-primary px-6 py-4 text-base font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                className="w-full flex items-center justify-center gap-3 rounded-lg bg-primary px-6 py-4 text-base font-semibold text-primary-foreground transition-all hover:opacity-90 hover:scale-[1.02]"
               >
                 <ShoppingBag className="h-5 w-5" />
                 {t("addToCart")}
