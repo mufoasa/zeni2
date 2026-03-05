@@ -29,7 +29,7 @@ export default async function AdminDashboardPage() {
     },
     {
       label: "Revenue",
-      value: `$${totalRevenue.toFixed(2)}`,
+      value: `${totalRevenue.toFixed(2)}`,
       icon: DollarSign,
     },
     {
@@ -102,7 +102,7 @@ export default async function AdminDashboardPage() {
                       {order.customer_name}
                     </td>
                     <td className="px-4 py-3 text-sm text-foreground">
-                      {"$"}{Number(order.total).toFixed(2)}
+                      {Number(order.total).toFixed(2)}
                     </td>
                     <td className="px-4 py-3">
                       <span
