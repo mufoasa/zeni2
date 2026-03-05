@@ -45,7 +45,7 @@ export default async function AdminDashboardPage() {
         Dashboard
       </h1>
       <p className="mt-2 text-muted-foreground">
-        Welcome back to the USTOP admin panel.
+        Majr se erdhe Zeni administratori, hakirma fecbukin.
       </p>
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
